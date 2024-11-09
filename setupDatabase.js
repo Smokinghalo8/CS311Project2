@@ -1,16 +1,24 @@
-// setupDatabase.js
+//I dont know what Im doing
 
+//I mean... SQLite seems easier..? I think? I dont know?
+
+
+//all these are requiersd
 const sqlite3 = require('sqlite3').verbose();
+
+
 const fs = require('fs');
 const path = require('path');
 
 const dbPath = path.join(__dirname, 'flashcards.db');
 
-// Ensure the database file exists
+//Make sure the database exists, I dont want any errors
 if (!fs.existsSync(dbPath)) {
   const db = new sqlite3.Database(dbPath);
-
-  // Create the table for storing flashcards
+  //needed
+  //its table creation for sorting
+  //just dont get rid of it
+  //I mean get rid of the old database
   db.serialize(() => {
     db.run(`
       CREATE TABLE flashcards (
@@ -22,7 +30,7 @@ if (!fs.existsSync(dbPath)) {
       )
     `);
 
-    // Add some sample flashcards data
+    //Flashcard data
     const stmt = db.prepare("INSERT INTO flashcards (question, answer) VALUES (?, ?)");
     stmt.run("What is the capital of France?", "Paris");
     stmt.run("What is the largest ocean on Earth?", "Pacific Ocean");
@@ -33,5 +41,10 @@ if (!fs.existsSync(dbPath)) {
   db.close();
   console.log("Database initialized!");
 } else {
+  //could also delete and remake the database
+  //will I?
+
+
+  //...maybe
   console.log("Database already exists.");
 }
